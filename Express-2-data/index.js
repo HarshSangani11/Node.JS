@@ -1,26 +1,56 @@
-const express = require("express");
-const port = 2339
+const express=require("express")
+const port=1010
+const app=express()
+const path = require("path");
 
-const app = express();
-app.set("view engine", "ejs");
+
+app.set("view engine","ejs")
 app.use(express.urlencoded());
+app.use("/public",express.static(path.join(__dirname,"public")));
 
-let students = [
-    { id: 1, name: "Harsh", city: "Rajkot" },
+let project=[
+    {
+        "id":1,name:"asd"
+    }
 ];
-app.get("/", (req, res) => {
-    res.render("index", { students });
+app.get("/",(req,res)=>{
+    res.render("index",{project});
 })
-app.post("/addData", (req, res) => {
-    req.body.id = students.length + 1;
-    students.push(req.body);
-    res.redirect("/")
+
+const middle=(req,res,next)=>{
+    console.log(req.body);
+    console.log("Hello");
+    next();
+}
+
+app.listen(port,(err)=>{
+    err ? console.log(err) :  console.log("Server is Start");
 })
-app.listen(port, (err) => {
-    err ? console.log(err) : console.log("Server Started on port:" + port);
+
+app.post("/addData",middle,(req,res)=>{
+    req.body.id=project.length+1;
+    project.push(req.body);
+    res.redirect("/");
 })
+
 app.get("/deleteData",(req,res)=>{
-    let studentData=students.filter((item)=>item.id !=req.query.id);
-    students=studentData;
+    let projectData=project.filter((item)=>item.id!=req.query.id);
+    project=projectData;
+    res.redirect("/");
+})
+
+app.get("/editData/:id",(req,res)=>{
+    let data=project.find((item)=>item.id == req.params.id);
+    res.render("edit",{data});
+})
+app.post("/updateData",(req,res)=>{
+    project.forEach((item)=>{
+        if(item.id==req.body.id){
+            item.name=req.body.name;
+        }
+        else{
+            item
+        }
+    })
     res.redirect("/");
 })

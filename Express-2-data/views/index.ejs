@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <title>Project Management</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <!-- Font Awesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <style>
+        /* Global styles */
+
+    </style>
+</head>
 <body>
-    <h1>Server Started</h1>
+    <h1>Project Management</h1>
     <form action="/addData" method="post">
-        <input type="text" placeholder="Enter your Name" name="name">
-        <input type="text" placeholder="Enter your City" name="city">
+        <input type="text" name="name" placeholder="Enter Your Project Name" required>
         <button type="submit">Submit</button>
     </form>
 
-    <table border="1" width="80%">
+    <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>City</th>
+                <th>ID</th>
+                <th>Project</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <% students.map((e,i)=> { %>
+            <% project.map((e, i) => { %>
                 <tr>
-                    <td>
-                        <%= e.id %>
-                    </td>
-                    <td>
-                        <%= e.name %>
-                    </td>
-                    <td>
-                        <%= e.city %>
-                    </td>
-                    <td>
-                        <a href="/deleteData?id=<%=e.id%>"><button>Delete</button></a>
+                    <td><%= e.id %></td>
+                    <td><%= e.name %></td>
+                    <td class="action-buttons">
+                        <a href="/editData/<%= e.id %>">
+                            <button><i class="fas fa-edit"></i></button> <!-- Edit Icon -->
+                        </a>
+                        <a href="/deleteData?id=<%= e.id %>">
+                            <button><i class="fas fa-trash-alt"></i></button> <!-- Delete Icon -->
+                        </a>
                     </td>
                 </tr>
-                <% }); %>
+            <% }) %>
         </tbody>
     </table>
 </body>
-
 </html>
