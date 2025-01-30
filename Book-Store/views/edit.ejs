@@ -1,0 +1,122 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/updateData" method="post">
+        
+        <input type="text" name="id" value="<%=data.id%>" hidden>
+        <input type="text" name="name" value="<%=data.name%>" placeholder="Enter Your Book Name" required>
+        <input type="text" name="Aname"value="<%=data.Aname%>" placeholder="Enter Your Book Author Name" required>
+        <input type="number" name="price" value="<%=data.price%>" placeholder="Enter Your Book Price" required>
+        <input type="number" name="scopy" value="<%=data.scopy%>" placeholder="Enter number of sold copy" required>
+        <input type="date" name="date"value="<%=data.date%>" placeholder="Enter Publiced Date" required>
+        <input type="text" name="img" value="<%=data.img%>" placeholder="Enter Img URL">
+        <button type="submit">SUBMIT</button>
+    </form>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #2a9d8f;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        /* Centered Form */
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            padding-right: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #2a9d8f;
+        }
+
+        .form-container input,
+        .form-container button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #2a9d8f;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #21867a;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-container {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Edit Your Book</h1>
+    </header>
+
+    <div class="form-container">
+        <h2>Update Book Details</h2>
+        <form action="/updateData" method="post">
+            <input type="text" name="id" value="<%= data.id %>" hidden>
+            <input type="text" name="name" value="<%= data.name %>" placeholder="Enter Book Name" required>
+            <input type="text" name="Aname" value="<%= data.Aname %>" placeholder="Enter Author Name" required>
+            <input type="number" name="price" value="<%= data.price %>" placeholder="Enter Book Price (₹)" required>
+            <input type="number" name="scopy" value="<%= data.scopy %>" placeholder="Enter Number of Sold Copies" required>
+            <input type="date" name="date" value="<%= data.date %>" required>
+            <input type="text" name="img" value="<%= data.img %>" placeholder="Enter Image URL">
+            <button type="submit">Update Book</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

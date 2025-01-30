@@ -1,0 +1,287 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/addData" method="post">
+        <input type="text" name="name" placeholder="Enter Your Book Name" required>
+        <input type="text" name="Aname" placeholder="Enter Your Book Author Name" required>
+        <input type="number" name="price" placeholder="Enter Your Book Price" required>
+        <input type="number" name="scopy" placeholder="Enter number of sold copy" required>
+        <input type="date" name="date" placeholder="Enter Publiced Date" required>
+        <input type="text" name="img" placeholder="Enter Img URL">
+        <button type="submit">SUBMIT</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>img</th>
+                <th>Name</th>
+                <th>Author Name</th>
+                <th>Price</th>
+                <th>Sold Copy</th>
+                <th>Publiced Date</th>
+                <th>ID</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% data.map((e,i)=>{%>
+                <tr>
+
+                    <td><img src="<%= e.img %>" alt=""></td>
+                    <td>
+                        <%= e.name %>
+                    </td>
+                    <td>
+                        <%= e.Aname %>
+                    </td>
+                    <td>
+                        <%= e.price %>
+                    </td>
+                    <td>
+                        <%= e.scopy %>
+                    </td>
+                    <td>
+                        <%= new Date(e.date).toLocaleDateString('en-GB') %>
+                    </td>
+                    <td>
+                        <%= e.id %>
+                    </td>
+                    <td>
+                        <a href="/DeleteDAta?id=<%= e.id %>">
+                            <button>Delete</button>
+                        </a>
+                        <a href="/editData/<%= e.id %>">
+                            <button>Edit</button>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #2a9d8f;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+            gap: 40px;
+        }
+
+        /* Form Styles */
+        .form-container {
+            flex: 1;
+            max-width: 400px;
+            padding: 20px;
+            padding-right: 40px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container input,
+        .form-container button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #2a9d8f;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #21867a;
+        }
+
+        /* Book Cards */
+        .book-container {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 250px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            background-color: #f8f8f8;
+            padding: 5px;
+        }
+
+        .card-content {
+            padding: 10px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 5px 0;
+            color: #2a9d8f;
+            font-size: 1rem;
+        }
+
+        .card-content p {
+            margin: 4px 0;
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+
+        .card-actions a button {
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card-actions a button:hover {
+            background-color: #21867a;
+        }
+
+        .card-actions a button.delete {
+            background-color: #e63946;
+        }
+
+        .card-actions a button.delete:hover {
+            background-color: #d62839;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .form-container {
+                max-width: 90%;
+            }
+            
+            .book-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Our Book Store</h1>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Side - Form -->
+        <div class="form-container">
+            <h2>Add a Book</h2>
+            <form action="/addData" method="post">
+                <input type="text" name="name" placeholder="Enter Book Name" required>
+                <input type="text" name="Aname" placeholder="Enter Author Name" required>
+                <input type="number" name="price" placeholder="Enter Book Price (₹)" required>
+                <input type="number" name="scopy" placeholder="Enter Number of Sold Copies" required>
+                <input type="date" name="date" placeholder="Enter Published Date" required>
+                <input type="text" name="img" placeholder="Enter Book Image URL">
+                <button type="submit">Add Book</button>
+            </form>
+        </div>
+
+        <!-- Right Side - Books -->
+        <div class="book-container">
+            <% data.map((e, i) => { %>
+                <div class="card">
+                    <img src="<%= e.img %>" alt="Book Image">
+                    <div class="card-content">
+                        <h3><%= e.name %></h3>
+                        <p><strong>Author:</strong> <%= e.Aname %></p>
+                        <p><strong>Price:</strong> ₹<%= e.price %></p>
+                        <p><strong>Sold Copies:</strong> <%= e.scopy %></p>
+                        <p><strong>Published Date:</strong> <%= new Date(e.date).toLocaleDateString('en-GB') %></p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="/DeleteDAta?id=<%= e._id %>">
+                            <button class="delete">Delete</button>
+                        </a>
+                        <a href="/editData/<%= e._id %>">
+                            <button>Edit</button>
+                        </a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+
+</html>
