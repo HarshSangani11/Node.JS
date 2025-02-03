@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management</title>
+    <link rel="stylesheet" href="../public/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+   /* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #27ae60;
+    color: white;
+    margin-bottom: 40px;
+    border-radius: 8px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"], input[type="file"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 250px;
+    border: none;
+    border-radius: 5px;
+    background: #ecf0f1;
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    background: linear-gradient(to right, #e74c3c, #c0392b);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #c0392b, #a93226);
+}
+
+/* Table Container */
+.table-container {
+    width: 90%;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table Header */
+th {
+    background: #27ae60;
+    color: white;
+    font-size: 18px;
+    padding: 15px;
+}
+
+/* Table Rows */
+td, th {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Alternate row background color (Zebra Stripes) */
+tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* Hover Effect */
+tr:hover {
+    background: #d5f5e3;
+    transition: 0.3s;
+}
+
+/* Images inside Table */
+td img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-buttons a button {
+    background: linear-gradient(to right, #3498db, #2980b9);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.action-buttons a button:hover {
+    background: linear-gradient(to right, #2980b9, #1f618d);
+}
+
+/* Make table responsive */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    td img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h1>Project Management</h1>
+    <form action="/addData" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Enter Your Project Name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Project</th>
+                    <th>Image</th>
+                    
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.map((e, i) => { %>
+                    <tr>
+                        <td><%= e.id %></td>
+                        <td><%= e.name %></td>
+                        <td><img src="<%= e.image %>" alt="Project Image"></td>
+                        <td class="action-buttons">
+                            <a href="/editData/<%= e.id %>">
+                                <button><i class="fas fa-edit"></i> Edit</button>
+                            </a>
+                            <a href="/deleteData?id=<%= e.id %>">
+                                <button><i class="fas fa-trash-alt"></i> Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    </body>
+</html>
