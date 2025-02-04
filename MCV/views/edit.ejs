@@ -17,8 +17,8 @@
     <form action="/updateData" method="post" enctype="multipart/form-data">
         <input type="text" value="<%= data.id %>" name="id" placeholder="ID" hidden>
         <input type="text" value="<%= data.name %>" name="name" placeholder="Update Project Name" required>
-        <!-- <img src="/<%= data.image%>" alt="" width="200px" height="200px">
-         <input type="file" name="image"> -->
+        <img src="/<%= data.image%>" alt="" width="200px" height="200px">
+         <input type="file" name="image">
         <button type="submit">Update</button>
     </form>
 </body>

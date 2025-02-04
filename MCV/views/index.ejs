@@ -162,6 +162,7 @@ td img {
     <h1>Project Management</h1>
     <form action="/addData" method="post" enctype="multipart/form-data">
         <input type="text" name="name" placeholder="Enter Your Project Name" required>
+        <input type="file" name="image">
         <button type="submit">Submit</button>
     </form>
 
@@ -172,7 +173,6 @@ td img {
                     <th>ID</th>
                     <th>Project</th>
                     <th>Image</th>
-                    
                     <th>Action</th>
                 </tr>
             </thead>
@@ -181,7 +181,7 @@ td img {
                     <tr>
                         <td><%= e.id %></td>
                         <td><%= e.name %></td>
-                        <td><img src="<%= e.image %>" alt="Project Image"></td>
+                        <td><img src="<%= e.image %>" alt=""></td>
                         <td class="action-buttons">
                             <a href="/editData/<%= e.id %>">
                                 <button><i class="fas fa-edit"></i> Edit</button>
