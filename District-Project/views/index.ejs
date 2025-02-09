@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District by Zomato - Movies, Events, Dining, Sports, Concerts</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="../public/unnamed.webp">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../public/css/styles.css">
+
+  
+</head>
+<body class="bg-dark text-white hero-background">
+
+    <!-- Navigation -->
+    <header class="fixed-top glass-nav py-4">
+        <nav class="container d-flex align-items-center justify-content-between">
+            
+            <!-- Logo -->
+            <div class="logo fs-4 ">
+                district
+                <span class="text-warning text-uppercase">by Zomato</span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="d-none d-md-flex flex-grow-1 justify-content-center gap-4">
+                <button class="nav-button active btn btn-warning rounded-pill px-4">
+                    <i class="ph ph-music-notes"></i> Events
+                </button>
+                <button class="nav-button btn btn-dark text-secondary rounded-pill px-4">
+                    <i class="ph ph-film-slate"></i> Movies
+                    <span class="coming-soon-pill ms-2">Coming soon</span>
+                </button>
+                <button class="nav-button btn btn-dark text-secondary rounded-pill px-4">
+                    <i class="ph ph-fork-knife"></i> Dining
+                    <span class="coming-soon-pill ms-2">Coming soon</span>
+                </button>
+            </div>
+
+            <!-- Right Section -->
+            <div class="d-none d-md-flex align-items-center gap-3 add-item">
+                <a href="/addData">
+                    <button class="btn btn-warning rounded-pill px-3">
+                        <i class="ph ph-plus-circle"></i> Add Movie
+                    </button>
+                </a>
+                <button class="btn btn-dark rounded-circle p-2">
+                    <i class="ph ph-user-circle fs-4"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="d-md-none btn btn-dark rounded-circle p-2">
+                <i class="ph ph-list fs-4"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="position-fixed top-0 start-0 w-100 h-100 bg-black bg-opacity-95 d-none">
+        <button id="close-menu" class="position-absolute top-3 end-3 btn btn-dark p-2">
+            <i class="ph ph-x fs-3"></i>
+        </button>
+        <div class="d-flex flex-column align-items-center justify-content-center vh-100 gap-3">
+            <button class="btn btn-warning w-75 py-3">Events</button>
+            <button class="btn btn-dark text-secondary w-75 py-3">Movies</button>
+            <button class="btn btn-dark text-secondary w-75 py-3">Dining</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="container text-center py-5 mt-5 hero">
+        <p class="fs-5 mb-2 d-flex align-items-center justify-content-center">
+            <i class="ph ph-bank fs-2 me-2"></i> IDFC FIRST Bank
+        </p>
+        <h2 class="fw-bold mb-3">INDIA VS ENGLAND SERIES</h2>
+        <p class="text-white fs-5 mb-4">
+            Get ready for an exhilarating clash as India faces England in the much-anticipated series.Witness your favourite players in action, <br> delivering thrilling moments, big hits, and intense competition.
+        </p>
+        <h2 class="fw-bold fs-3 d-flex align-items-center justify-content-center">
+            <i class="ph ph-ticket fs-3 me-2"></i> GRAB YOUR TICKETS NOW!
+        </h2>
+    </div>
+   <!-- Bootstrap Carousel -->
+<div id="eventCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <% if (carouselItems.length > 0) { %>
+            <% carouselItems.forEach((e, i) => { %>
+                <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                    <div class="d-flex justify-content-center">
+                        <div class="card bg-dark text-white shadow-lg p-3" style="width: 22rem;">
+                            <img src="<%= e.image %>" class="card-img-top" alt="Event Image">
+                            <div class="card-body">
+                                <h5 class="card-title text-center"><%= e.title %></h5>
+                                <p class="text-center"><i class="ph ph-calendar"></i> <%= e.date %> | <%= e.time %></p>
+                                <p class="text-center"><i class="ph ph-map-pin"></i> <%= e.location %></p>
+                                <p class="text-center text-warning fw-bold">Starting from ₹ <%= e.price %></p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="/editData/<%= e._id %>" class="btn btn-warning">Edit</a>
+                                    <a href="/deleteData/<%= e._id %>" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="carousel-item active text-center text-white">
+                <p>No events available</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-secondary">
+        &copy; 2025 District by Zomato. All Rights Reserved.
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById("mobile-menu-btn").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.remove("d-none");
+        });
+
+        document.getElementById("close-menu").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.add("d-none");
+        });
+    </script>
+
+</body>
+</html>
