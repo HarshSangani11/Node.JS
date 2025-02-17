@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SeoDashboard - Admin Registration</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/seodashlogo.png" />
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link href="/public/assets2/libs/flot/css/float-chart.css" rel="stylesheet">
+    <style>
+        /* Sidebar Fix */
+        .sidebar {
+            width: 250px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        /* Content Area */
+        .container-flui {
+            /* margin-left: 270px; Sidebar ni width plus margin */
+          width: 73%;
+          /* border: 2px solid; */
+            position: relative;
+           left: 25%;
+            /* padding: 20px; */
+        }
+
+        /* Responsive Adjustment */
+    
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <%- include("aside") %>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container-flui">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Admin Registration</h4>
+                        <form action="/addDatainfo" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Profile Image</label>
+                                <input type="file" name="image" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" name="fname" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" name="lname" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="Email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="pass" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">City</label>
+                                <select name="city" class="form-select" required>
+                                    <option value="" disabled selected>Select City</option>
+                                    <optgroup>
+                                        <option  value="Rajkot">Rajkot</option>
+                                        <option  value="Surat">Surat</option>
+                                        <option  value="Jamnagar">Jamnagar</option>
+                                        <option  value="Junagadh">Junagadh</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Gender</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="gender" value="Male" required>
+                                        <label class="form-check-label">Male</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="gender" value="Female" required>
+                                        <label class="form-check-label">Female</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="gender" value="Other" required>
+                                        <label class="form-check-label">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Hobbies</label>
+                                <div class="d-flex gap-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="hobby" value="reading">
+                                        <label class="form-check-label">Reading</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="hobby" value="sports">
+                                        <label class="form-check-label">Sports</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="hobby" value="music">
+                                        <label class="form-check-label">Music</label>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+
+</body>
+</html>
