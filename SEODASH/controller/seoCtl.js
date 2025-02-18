@@ -2,8 +2,8 @@ const schema=require("../model/seoSchema");
 const schema2=require("../model/seoSchemo");
 const fs=require("fs");
 
-module.exports.dashboard = (req,res)=>{
-    if(req.cookies.admindata){
+module.exports.dashboard = (req,res)=>{    
+    if(req.cookies.admindata2){
         res.render("dashboard");
     }
     else{
@@ -71,41 +71,41 @@ module.exports.updateData = async(req, res) => {
         res.redirect("/viewinfo");
     });
 }
-// module.exports.logindata=async(req,res)=>{
+module.exports.logindata=async(req,res)=>{    
+    await schema.findOne({email:req.body.email}).then((data=>{
+        if(data.password==req.body.password){
+            
+            res.cookie("admindata2",data)
+            res.redirect("/dashboard")
+        }
+        else{
+            res.redirect("/")
+        }
+    }))
+}
+// module.exports.logindata = async (req, res) => {
 //     console.log(req.body);
-    
-//     await schema.findOne({}).then((data=>{
-//         if(data.email==req.body.email && data.password==req.body.password){
-//             res.cookie("admindata2",data)
-//             res.redirect("/dashboard")
+
+//     await schema.findOne({ email: req.body.email }).then((data) => {
+//         if (!data) {
+//             console.log("User not found!");
+//             return res.redirect("/"); // Redirect if no user found
 //         }
-//         else{
-//             res.redirect("/")
+//         console.log(data);
+        
+
+//         if (data.password == Number(req.body.password)) {
+//             res.cookie("admindata2", data);
+//             return res.redirect("/dashboard");
+//         } else {
+//             console.log("Incorrect password!");
+//             return res.redirect("/"); // Redirect if password is incorrect
 //         }
-
-//     }))
-// }
-module.exports.logindata = async (req, res) => {
-    console.log(req.body);
-
-    await schema.findOne({ email: req.body.email }).then((data) => {
-        if (!data) {
-            console.log("User not found!");
-            return res.redirect("/"); // Redirect if no user found
-        }
-
-        if (data.password == req.body.password) {
-            res.cookie("admindata2", data);
-            return res.redirect("/dashboard");
-        } else {
-            console.log("Incorrect password!");
-            return res.redirect("/"); // Redirect if password is incorrect
-        }
-    }).catch((err) => {
-        console.error("Database error:", err);
-        res.redirect("/");
-    });
-};
+//     }).catch((err) => {
+//         console.error("Database error:", err);
+//         res.redirect("/");
+//     });
+// };
 
 module.exports.logout=(req,res)=>{
     res.clearCookie("admindata2")
