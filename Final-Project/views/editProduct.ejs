@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/updateProduct" method="post">
+        <input type="text" placeholder="Enter Product Name" name="id" value="<%=data.id%>" hidden>
+        <input type="text" placeholder="Enter Product Name" name="proName" value="<%=data.proName%>">
+        <input type="text" placeholder="Enter Product Price" name="proPrice" value="<%=data.proPrice%>">
+        <input type="text" placeholder="Enter Product Discription" name="proDiscription" value="<%=data.proDiscription%>">
+
+        <button type="submit">Update Product</button>
+    </form>
+</body>
+</html>
